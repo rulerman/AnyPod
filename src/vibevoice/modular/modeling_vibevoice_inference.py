@@ -4,10 +4,10 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 
-# 导入Transformers库中的自动模型加载类
+# Import AutoModel loaders from Transformers
 from transformers.models.auto import AutoModel, AutoModelForCausalLM
 
-# 导入与生成相关的类和工具
+# Import generation-related classes and utilities
 from transformers.generation import GenerationMixin, GenerationConfig, LogitsProcessor, LogitsProcessorList, StoppingCriteriaList
 from transformers.modeling_outputs import BaseModelOutputWithPast, ModelOutput
 from transformers import modeling_utils
@@ -16,32 +16,32 @@ from transformers.modeling_flash_attention_utils import FlashAttentionKwargs
 from transformers.utils import logging
 
 
-# 从本地模块导入相关组件
+# Import components from local modules
 # from .modular_vibevoice_tokenizer import VibeVoiceTokenizerStreamingCache, VibeVoiceAcousticTokenizerModel, VibeVoiceSemanticTokenizerModel
-from .modular_vibevoice_tokenizer import VibeVoiceTokenizerStreamingCache, VibeVoiceTokenizerEncoderOutput  # 导入语音标记化器和编码器输出
-from .modular_vibevoice_diffusion_head import VibeVoiceDiffusionHead  # 导入扩散模型头部
-from vibevoice.schedule.dpm_solver import DPMSolverMultistepScheduler  # 导入DPM求解器调度器
+from .modular_vibevoice_tokenizer import VibeVoiceTokenizerStreamingCache, VibeVoiceTokenizerEncoderOutput  # Speech tokenizer + encoder output
+from .modular_vibevoice_diffusion_head import VibeVoiceDiffusionHead  # Diffusion head
+from vibevoice.schedule.dpm_solver import DPMSolverMultistepScheduler  # DPM solver scheduler
 
-from .configuration_vibevoice import VibeVoiceConfig  # 导入VibeVoice配置类
+from .configuration_vibevoice import VibeVoiceConfig  # VibeVoice config
 
-from .modular_vibevoice_text_tokenizer import VibeVoiceTextTokenizer, VibeVoiceTextTokenizerFast  # 导入文本标记化器
+from .modular_vibevoice_text_tokenizer import VibeVoiceTextTokenizer, VibeVoiceTextTokenizerFast  # Text tokenizers
 
-from .modeling_vibevoice import VibeVoiceModel, VibeVoicePreTrainedModel  # 导入基础模型类
-from .streamer import AudioStreamer, AsyncAudioStreamer  # 导入音频流处理器
+from .modeling_vibevoice import VibeVoiceModel, VibeVoicePreTrainedModel  # Base model classes
+from .streamer import AudioStreamer, AsyncAudioStreamer  # Audio streamers
 
-# 获取日志记录器
+# Logger
 logger = logging.get_logger(__name__)
 
-# 确保并行处理样式已定义，如果未定义则设置默认值
+# Ensure parallel styles are defined (fallback for older Transformers versions).
 if not hasattr(modeling_utils, "ALL_PARALLEL_STYLES") or modeling_utils.ALL_PARALLEL_STYLES is None:
     modeling_utils.ALL_PARALLEL_STYLES = ["tp", "none", "colwise", "rowwise"]
 
-# 定义因果语言模型输出类，继承自BaseModelOutputWithPast
+# Causal LM output (inherits BaseModelOutputWithPast).
 @dataclass
 class VibeVoiceCausalLMOutputWithPast(BaseModelOutputWithPast):
-    logits: Optional[torch.FloatTensor] = None  # 模型输出的logits
+    logits: Optional[torch.FloatTensor] = None  # Output logits
 
-# 定义VibeVoice生成输出类，用于存储生成结果
+# VibeVoice generation output.
 @dataclass
 class VibeVoiceGenerationOutput(ModelOutput):
     """
@@ -53,25 +53,25 @@ class VibeVoiceGenerationOutput(ModelOutput):
         speech_outputs (`List[torch.FloatTensor]`, *optional*):
             List of generated speech waveforms or latents for each speech segment.
     """
-    sequences: torch.LongTensor = None  # 生成的标记序列
-    speech_outputs: Optional[List[torch.FloatTensor]] = None  # 生成的语音输出列表
-    reach_max_step_sample: Optional[torch.BoolTensor] = None  # 标记是否达到最大生成步数
+    sequences: torch.LongTensor = None  # Generated token sequences
+    speech_outputs: Optional[List[torch.FloatTensor]] = None  # Generated speech outputs (per segment)
+    reach_max_step_sample: Optional[torch.BoolTensor] = None  # Whether max generation steps were reached
 
-# 定义标记约束处理器，限制生成过程中只能生成有效的标记
+# Token constraint processor: restrict generation to valid tokens.
 class VibeVoiceTokenConstraintProcessor(LogitsProcessor):
     """Constrains token generation to only valid tokens during speech generation."""
     
     def __init__(self, valid_token_ids: List[int], device: torch.device = None):
-        # 将有效标记ID转换为张量
+        # Convert valid token ids to a tensor.
         self.valid_token_ids = torch.tensor(valid_token_ids, dtype=torch.long, device=device)
         
     def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
-        # 创建掩码，将无效标记的概率设为负无穷
+        # Mask out invalid tokens by setting their logits to -inf.
         mask = torch.full_like(scores, float('-inf'))
-        # 将有效标记的掩码值设为0
+        # Keep valid tokens unchanged (add 0).
         mask[:, self.valid_token_ids] = 0
         
-        # 应用掩码到分数上
+        # Apply mask to scores.
         scores = scores + mask
         return scores
     

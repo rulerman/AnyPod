@@ -53,7 +53,7 @@ def synthesize_podcast(
     if "[S2]" in text_to_generate:
         raise ValueError("moss-tts(api) 后端仅支持单人模式，脚本中不能包含 [S2] 标签")
 
-    # 去除 [S1] 标签，保留纯文本
+    # Remove [S1] tags and keep plain text
     text = re.sub(r"\[S1\]", "", text_to_generate).strip()
 
     output_dir = Path(output_dir)

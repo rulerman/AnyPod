@@ -1,7 +1,7 @@
-"""前 3 步（Parse → Understand → BookCharter）产物的跨 output_dir 缓存。
+"""Cross-output_dir cache for artifacts from Steps 1–3 (Parse → Understand → BookCharter).
 
-缓存判定规则：文件名相同 + 文件大小相同 → 视为同一文件。
-缓存目录：{项目根目录}/cache/{key}/
+Cache key: same filename + same file size → treated as the same input.
+Cache location: {project_root}/cache/{key}/
 """
 
 from __future__ import annotations
@@ -13,11 +13,11 @@ from bookcast.core.runtime_log import console_print
 
 print = console_print
 
-# 项目根目录（AnyPod/）
+# Project root (AnyPod/)
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CACHE_DIR = _PROJECT_ROOT / "cache"
 
-# 需要缓存的文件和目录（相对于 output_dir）
+# Files and directories to cache (relative to output_dir)
 CACHED_ITEMS: list[str] = [
     "book_structure.json",
     "chunk_source_map.jsonl",
@@ -34,14 +34,14 @@ CACHED_ITEMS: list[str] = [
 
 
 def compute_cache_key(input_path: Path) -> str:
-    """根据文件名和文件大小生成缓存 key。"""
+    """Build a cache key from filename and file size."""
     resolved = Path(input_path).resolve()
     size = resolved.stat().st_size
     return f"{resolved.name}_{size}"
 
 
 def find_cache(input_path: Path) -> Path | None:
-    """检查缓存是否存在且完整（book_charter.json 存在），返回缓存目录路径或 None。"""
+    """Return the cache dir if it exists and looks complete (book_charter.json exists)."""
     key = compute_cache_key(input_path)
     cache_path = CACHE_DIR / key
     if cache_path.is_dir() and (cache_path / "book_charter.json").is_file():
@@ -50,7 +50,7 @@ def find_cache(input_path: Path) -> Path | None:
 
 
 def restore_from_cache(cache_dir: Path, output_dir: Path) -> None:
-    """将缓存内容复制到 output_dir。"""
+    """Copy cached artifacts into output_dir."""
     output_dir.mkdir(parents=True, exist_ok=True)
     for item_name in CACHED_ITEMS:
         src = cache_dir / item_name
@@ -71,7 +71,7 @@ def restore_from_cache(cache_dir: Path, output_dir: Path) -> None:
 
 
 def save_to_cache(input_path: Path, output_dir: Path) -> None:
-    """将 output_dir 中前 3 步的产物复制到缓存目录。"""
+    """Copy Step 1–3 artifacts from output_dir into the cache directory."""
     key = compute_cache_key(input_path)
     cache_path = CACHE_DIR / key
     if cache_path.exists():

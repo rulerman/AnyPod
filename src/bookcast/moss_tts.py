@@ -47,7 +47,7 @@ def resolve_attn_implementation() -> str:
         return "sdpa"
 
 
-# ── cuDNN SDPA 设置 ──
+# ── cuDNN SDPA settings ──
 torch.backends.cuda.enable_cudnn_sdp(False)
 torch.backends.cuda.enable_flash_sdp(True)
 torch.backends.cuda.enable_math_sdp(True)
@@ -95,7 +95,7 @@ def synthesize_podcast(
     if "[S2]" in text_to_generate:
         raise ValueError("moss-tts 后端仅支持单人模式，脚本中不能包含 [S2] 标签")
 
-    # 去除 [S1] 标签，保留纯文本
+    # Remove [S1] tags and keep plain text
     text = re.sub(r"\[S1\]", "", text_to_generate).strip()
 
     ref_audio_path = PROMPT_AUDIO_SPEAKER1

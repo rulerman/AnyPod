@@ -179,7 +179,7 @@ def parse_args_with_config(argv: list[str] | None = None) -> argparse.Namespace:
     if config_path is not None:
         merged.update(_load_config_json(config_path.resolve(), parser))
 
-    # 显式命令行参数优先于 JSON 配置；未显式给出的参数才回退到 JSON 或默认值。
+    # Explicit CLI arguments override JSON config; unspecified args fall back to JSON or defaults.
     for dest in _collect_explicit_cli_dests(parser, argv):
         merged[dest] = getattr(cli_args, dest)
 
@@ -730,7 +730,7 @@ def run_full_pipeline(args: argparse.Namespace) -> None:
         _step_done(3, f"({_fmt_elapsed(time.time() - t0)})")
     resume_chain = resume_chain and step3_reused
 
-    # ── Save cache (仅在非缓存命中时) ──
+    # ── Save cache (only when not a cache hit) ──
     if cache_hit_dir is None:
         save_to_cache(args.input_path, output_dir)
 
