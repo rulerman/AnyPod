@@ -1,0 +1,4 @@
+{"voice_id": "voice_a", "speaker_name": "default_en_female", "prompt_audio": "assets/default_en_female.wav", "prompt_text": "It's not just crunching data, it's starting to develop a more sophisticated understanding of how language actually works."}
+{"voice_id": "voice_b", "speaker_name": "default_en_male", "prompt_audio": "assets/default_en_male.wav", "prompt_text": "Okay, I'm starting to see how this multi-headed approach could lead to some pretty impressive results."}
+{"voice_id": "voice_c", "speaker_name": "default_zh_male", "prompt_audio": "assets/default_zh_male.wav", "prompt_text": "下面这个故事啊，里面没有灵异，但是是我最喜欢的那种故事。就是如果你在听这个故事的时候啊，尤其是故事高潮时候那一句话，你如果能在脑海里形成一个画面，那么可能今晚啊，你就指着这个画面熬夜了。"}
+{"voice_id": "voice_d", "speaker_name": "default_zh_female", "prompt_audio": "assets/default_zh_female.wav", "prompt_text": "但是这个小小的家族，它其实是不足以承受这么长远、长久的这个供养的，所以它要把这个诅咒分担出去，所以他们就会念一个这个叫什么咒语吧。"}

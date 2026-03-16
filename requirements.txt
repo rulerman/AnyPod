@@ -1,0 +1,5 @@
+gradio
+requests
+pymupdf
+pymupdf4llm
+soundfile

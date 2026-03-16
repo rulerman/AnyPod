@@ -1,0 +1,1 @@
+"""VibeVoice backend package (vendored)."""

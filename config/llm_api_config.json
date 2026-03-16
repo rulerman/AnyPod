@@ -1,0 +1,57 @@
+{
+  "understanding_agent": [
+    {
+      "base_url": "",
+      "model": "",
+      "api_key": "",
+      "api_key_env": "",
+      "temperature":"",
+      "top_p": "",
+      "top_k":"",
+      "timeout": 600,
+      "system_prompt": "You are a helpful assistant",
+      "extra_headers": {},
+      "extra_body": {}
+    }
+  ],
+  "plan_agent": [
+    {
+      "base_url": "",
+      "model": "",
+      "api_key": "",
+      "api_key_env": "",
+      "temperature":"",
+      "top_p": "",
+      "top_k":"",
+      "timeout": 600,
+      "system_prompt": "You are a helpful assistant",
+      "extra_headers": {},
+      "extra_body": {}
+    }
+  ],
+  "writing_agent": [
+    {
+      "base_url": "",
+      "model": "",
+      "api_key": "",
+      "api_key_env": "",
+      "temperature":"",
+      "top_p": "",
+      "top_k":"",
+      "timeout": 600,
+      "system_prompt": "You are a helpful assistant",
+      "extra_headers": {},
+      "extra_body": {}
+    }
+  ],
+  "moss_tts_api": {
+    "base_url": "https://studio.mosi.cn/api/v1/audio/speech",
+    "model": "moss-tts",
+    "api_key": "",
+    "voice_id": "2001257729754140672",
+    "max_new_tokens": 32000,
+    "temperature": 1.7,
+    "top_p": 0.8,
+    "top_k": 25
+  }
+}
