@@ -2,8 +2,11 @@
 
 # AnyPod
 
-<img src="assets/anypod.png" alt="alt text" width="330">
-<br>
+<p align="center">
+    <img src="assets/anypod.png" alt="AnyPod" width="330">
+  </p>
+
+  <br>
 
 AnyPod 是一个开源的自动化播客生成工具，基于 MOSS-TTSD 等开源 TTS 模型驱动。它可以将任意文本输入（TXT/PDF）转化为多集高质量播客节目。该工具通过 LLM Agent 自动分析输入文本、规划播客内容、生成播客剧本，并通过 TTS 合成为语音。支持自定义音色克隆、编辑节目设定和剧本，以及中英文双语的输入和输出。
 

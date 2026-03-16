@@ -2,8 +2,11 @@
 
 # AnyPod
 
-<img src="assets/anypod.png" alt="alt text" width="330">
-<br>
+ <p align="center">
+    <img src="assets/anypod.png" alt="AnyPod" width="330">
+  </p>
+
+  <br>
 
 AnyPod is an open-source automated podcast generation tool powered by open-source TTS models such as MOSS-TTSD. It transforms any text input (TXT/PDF) into a multi-episode, high-quality podcast. The tool leverages LLM agents to automatically analyze input text, plan podcast content, generate scripts, and synthesize speech via TTS. It supports custom voice cloning, editable show settings and scripts, and bilingual input/output in both English and Chinese.
 
