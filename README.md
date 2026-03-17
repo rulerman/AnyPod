@@ -119,19 +119,19 @@ Edit `config/anypod_config.json` to set input parameters.
 
 1. Podcast generation page
 
-![Podcast generation page](assets/ui_preview_1_podcast_generation.png)
+![Podcast generation page](assets/gradio.png)
 
 2. Edit host identity information
 
-![Edit host identity information](assets/ui_preview_2_edit_hosts.png)
+![Edit host identity information](assets/speaker_config.png)
 
 3. Edit podcast show information
 
-![Edit podcast show information](assets/ui_preview_3_edit_show_info.png)
+![Edit podcast show information](assets/podcast_config.png)
 
 4. Custom voice library
 
-![Custom voice library](assets/ui_preview_4_custom_voice.png)
+![Custom voice library](assets/voice_config.png)
 
 ## Coming Soon
 

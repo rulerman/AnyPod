@@ -119,19 +119,19 @@ python main.py \
 
 1. 播客生成界面
 
-![播客生成界面](assets/ui_preview_1_podcast_generation.png)
+![播客生成界面](assets/gradio.png)
 
 2. 编辑主持人身份信息
 
-![编辑主持人身份信息](assets/ui_preview_2_edit_hosts.png)
+![编辑主持人身份信息](assets/speaker_config.png)
 
 3. 编辑播客节目信息
 
-![编辑播客节目信息](assets/ui_preview_3_edit_show_info.png)
+![编辑播客节目信息](assets/podcast_config.png)
 
 4. 自定义音色
 
-![自定义音色](assets/ui_preview_4_custom_voice.png)
+![自定义音色](assets/voice_config.png)
 
 ## Coming Soon
 
