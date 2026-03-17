@@ -115,6 +115,24 @@ python main.py \
 
 请编辑 `config/anypod_config.json` 来设置输入参数。
 
+## UI 预览
+
+1. 播客生成界面
+
+![播客生成界面](assets/ui_preview_1_podcast_generation.png)
+
+2. 编辑主持人身份信息
+
+![编辑主持人身份信息](assets/ui_preview_2_edit_hosts.png)
+
+3. 编辑播客节目信息
+
+![编辑播客节目信息](assets/ui_preview_3_edit_show_info.png)
+
+4. 自定义音色
+
+![自定义音色](assets/ui_preview_4_custom_voice.png)
+
 ## Coming Soon
 
 - 支持接入更多 TTS 模型。
