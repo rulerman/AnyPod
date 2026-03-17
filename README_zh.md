@@ -119,19 +119,19 @@ python main.py \
 
 1. 播客生成
 
-<img src="assets/gradio.png" width="900" />
+<img src="assets/gradio.png" width="500" />
 
 2. 编辑主持人身份信息
 
-<img src="assets/speaker_config.png" width="900" />
+<img src="assets/speaker_config.png" width="300" />
 
 3. 编辑播客节目信息
 
-<img src="assets/podcast_config.png" width="900" />
+<img src="assets/podcast_config.png" width="300" />
 
 4. 自定义音色
 
-<img src="assets/voice_config.png" width="900" />
+<img src="assets/voice_config.png" width="300" />
 
 ## Coming Soon
 
