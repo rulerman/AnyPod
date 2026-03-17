@@ -12,6 +12,13 @@ AnyPod is an open-source automated podcast generation tool powered by open-sourc
 
 ## Installation
 
+This tool supports four TTS backends:
+
+- **MOSS-TTSD (8B)**: best overall quality (recommended).
+- **MOSS-TTS (8B)**: best quality for single-speaker generation.
+- **VibeVoice (1.5B)**: lightweight option for most personal devices.
+- **MOSS-TTS API**: easiest setup, but single-speaker only.
+
 ### Set Up a TTS Environment
 
 **If you are using MOSS-TTS / MOSS-TTSD as the TTS backend:**
