@@ -117,7 +117,7 @@ python main.py \
 
 ## UI 预览
 
-1. 播客生成界面
+1. 播客生成
 
 ![播客生成界面](assets/gradio.png)
 

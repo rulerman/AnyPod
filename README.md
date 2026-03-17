@@ -117,7 +117,7 @@ Edit `config/anypod_config.json` to set input parameters.
 
 ## UI Preview
 
-1. Podcast generation page
+1. Podcast generation
 
 ![Podcast generation page](assets/gradio.png)
 
